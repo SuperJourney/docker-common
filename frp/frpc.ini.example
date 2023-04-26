@@ -1,0 +1,9 @@
+[common]
+tls_enabled = true
+server_addr = x.x.x.x
+vhost_http_port = 8101
+
+[web]
+type = http
+local_port = 8080
+custom_domains = neo.example

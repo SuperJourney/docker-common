@@ -1,0 +1,50 @@
+version: '3.4'
+
+services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    privileged: true
+    restart: always
+    ports: 
+      - "3000:3000"
+    networks: 
+      - app_net
+
+  node-exporter:
+    image: prom/node-exporter
+    networks: 
+      - app_net
+  
+  mysqld-exporter:
+    image: prom/mysqld-exporter
+    environment: 
+      DATA_SOURCE_NAME: "root:123456@(mariadb:3306)/"
+    ports: 
+      - "9104:9104"
+    networks:
+      - app_net
+  
+  redis-exporter:
+    image: bitnami/redis-exporter
+    environment: 
+      REDIS_ADDR: "redis://redis-7000:7000"
+    ports: 
+      - "9121:9121"
+    networks:
+      - app_net
+  
+  prometheus:
+    build: 
+      context: ./grafana
+      dockerfile: Dockerfile-prometheus
+    volumes: 
+      - "./grafana/prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports: 
+      - "9090:9090"
+    networks: 
+      - app_net
+  
+networks:
+    app_net:
+        external: true

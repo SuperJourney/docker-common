@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+
+  redis-cluster:
+    build: 
+      context: ./redis/cluster
+    command: "/tmp/create-cluster.sh redis-7000:7000 redis-7001:7001 redis-7002:7002 "
+    privileged: true
+    # restart: always
+    ports: 
+      - "6379:6379"
+    depends_on: 
+      - redis-7000
+      - redis-7001
+      - redis-7002
+    networks: 
+      - app_net
+
+
+  redis-7000:
+    build: 
+      context: ./redis
+      args: 
+        PORT: 7000
+    privileged: true
+    restart: always
+    ports: 
+      - "7000:7000"
+    networks: 
+      - app_net
+
+  redis-7001:
+    build: 
+      context: ./redis
+      args: 
+        PORT: 7001
+    privileged: true
+    restart: always
+    ports: 
+      - "7001:7001"
+    networks: 
+      - app_net
+
+  redis-7002:
+    build: 
+      context: ./redis
+      args: 
+        PORT: 7002
+    privileged: true
+    restart: always
+    ports: 
+      - "7002:7002"
+    networks: 
+      - app_net
+
+networks:
+    app_net:
+        external: true

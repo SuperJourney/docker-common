@@ -1,0 +1,4 @@
+kind/istio
+chrome/chromedriver
+chrome/selenium-server-4.4.0.jar
+frp/frpc.ini

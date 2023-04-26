@@ -1,0 +1,30 @@
+version: '3'
+services:
+  frpc:
+    container_name: frpc
+    image: "snowdreamtech/frpc"
+    volumes:
+      - ./frp/frpc.ini:/etc/frp/frpc.ini
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    # networks:
+    #   - app_net
+
+  frps:
+    container_name: frps
+    image: "snowdreamtech/frps"
+    volumes:
+      - ./frp/frps.ini:/etc/frp/frps.ini
+    restart: unless-stopped
+    privileged: true
+    # ports:
+    #   - 7000:7000
+    # networks:
+    #   - app_net
+    network_mode: host 
+
+
+networks:
+    app_net:
+        external: true

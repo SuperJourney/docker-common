@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  mariadb:
+    build: 
+      context: ./mariadb
+    privileged: true
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: 123
+    ports: 
+      - "3307:3306"
+    networks: 
+      - app_net
+
+networks:
+    app_net:
+        external: true

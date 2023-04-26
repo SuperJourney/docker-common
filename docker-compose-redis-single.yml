@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+
+  redis:
+    build: 
+      context: ./redis
+      args: 
+        PORT: 6379
+    privileged: true
+    restart: always
+    ports: 
+      - "6379:6379"
+    networks: 
+      - app_net
+
+networks:
+    app_net:
+        external: true

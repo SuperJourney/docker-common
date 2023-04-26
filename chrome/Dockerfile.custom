@@ -1,0 +1,65 @@
+FROM openjdk:19-bullseye
+
+RUN  sed -i s@deb.debian.org@mirrors.tuna.tsinghua.edu.cn@g /etc/apt/sources.list
+
+RUN apt-get update
+# FROM openstax/selenium-chrome:20220427.071021
+
+RUN apt-get install  -y libglib2.0-dev \
+    libnss3-dev
+
+# 安装浏览器
+# RUN apt-get install chrome -y
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb
+
+# RUN rm -rf /var/lib/apt/lists/* && apt clean
+
+COPY chromedriver .
+COPY selenium-server-4.4.0.jar .
+
+RUN chmod +x chromedriver && mv chromedriver /usr/bin
+
+
+CMD ["java","-jar", "selenium-server-4.4.0.jar","standalone"]
+
+# RUN apt-get install -y --no-install-recommends 	\
+#     autoconf		\
+#     automake 	\
+#     bzip2 		\
+#     dpkg-dev 		\
+#     file 		\
+#     g++ 		\
+#     gcc 		\
+#     imagemagick 		\
+#     libbz2-dev 		\
+#     libc6-dev 		\
+#     libcurl4-openssl-dev 		\
+#     libdb-dev 		\
+#     ibevent-dev 		\
+#     libffi-dev 		\
+#     libgdbm-dev 		\
+#     libglib2.0-dev 		\
+#     libgmp-dev 		\
+#     libjpeg-dev 		\
+#     libkrb5-dev 		\
+#     liblzma-dev 		\
+#     libmagickcore-dev 		\
+#     libmagickwand-dev 		\
+#     libmaxminddb-dev 		\
+#     libncurses5-dev 		\
+#     libncursesw5-dev 		\
+#     libpng-dev 		\
+#     libpq-dev 		\
+#     libreadline-dev 		\
+#     libsqlite3-dev 		\
+#     libssl-dev 		\
+#     libtool 		\
+#     libwebp-dev 		\
+#     libxml2-dev 		\
+#     libxslt-dev 		\
+#     libyaml-dev 		\
+#     make 		\
+#     patch 		\
+#     unzip 		\
+#     xz-utils 		\
+#     zlib1g-dev 

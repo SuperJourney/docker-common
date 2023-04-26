@@ -1,0 +1,62 @@
+version: '3.4'
+
+services:
+  chrome:
+    build:
+      context: ./chrome
+    privileged: true
+    restart: always
+    # command: sleep infinity
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    networks:
+      - app_net
+  chrome-custom:
+    build:
+      context: ./chrome
+      dockerfile: Dockerfile.custom
+    privileged: true
+    restart: always
+    # command: sleep infinity
+    ports:
+      - "4445:4444"
+      - "7901:7900"
+    networks:
+      - app_net
+  chrome-m1:
+    build:
+      context: ./chrome
+      dockerfile: Dockerfile.custom-m1
+    privileged: true
+    restart: always
+    # command: sleep infinity
+    ports:
+      - "4447:4444"
+      - "7903:7900"
+    networks:
+      - app_net
+  chrome-openstax:
+    build:
+      context: ./chrome
+      dockerfile: Dockerfile.openstax
+    privileged: true
+    restart: always
+    # command: sleep infinity
+    ports:
+      - "4446:4444"
+      - "7902:7900"
+    networks:
+      - app_net
+  vnc-test:
+    build:
+      context: ./chrome
+      dockerfile: Dockerfile.vnc
+    privileged: true
+    restart: always
+    # command: sleep infinity
+    networks:
+      - app_net
+networks:
+  app_net:
+    external: true

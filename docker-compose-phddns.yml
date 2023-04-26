@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  phddns:
+    build: 
+      context: ./phddns
+    volumes:
+      - ./phddns/start.sh:/tmp/start.sh
+    privileged: true
+    restart: always
+    mac_address: AA-BB-CC-DD-EE-FF
+    environment:
+      - LOG_HTTP_IP='0.0.0.0' # 换成你想监听的地址
+
+    # command: sleep infinity
+    entrypoint: ["/bin/bash","/root/start.sh"]
+    ports:
+      - "11011:11011"

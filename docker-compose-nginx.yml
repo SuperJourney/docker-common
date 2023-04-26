@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+
+  nginx:
+    build: 
+      context: ./nginx
+      args:
+        - filename=forward
+    privileged: true
+    restart: always
+    ports:
+      - "88:88"
+      - "8443:8443"
+      - "8088:8088"
+
+    networks: 
+      - app_net
+
+networks:
+    app_net:
+        external: true

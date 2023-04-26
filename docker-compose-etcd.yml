@@ -1,0 +1,89 @@
+version: '3.4'
+
+services:
+  etcd-1:
+    container_name: etcd-1
+    build: 
+      context: ./etcd
+    privileged: true
+    restart: always
+    environment: 
+      - "ETCD_DATA_DIR=~"
+      - "ETCD_NAME=node-1"
+      - "ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd-1:2380" # communicating etcd data around the cluster
+      - "ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380"
+
+      - "ETCD_ADVERTISE_CLIENT_URLS=http://etcd-1:2379"
+      - "ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379"
+
+      - "ETCD_INITIAL_CLUSTER=node-1=http://etcd-1:2380,node-2=http://etcd-2:2380,node-3=http://etcd-3:2380"
+      - "ETCD_INITIAL_CLUSTER_STATE=new"
+
+      - "ALLOW_NONE_AUTHENTICATION=yes"
+      - "ENDPOINTS=etcd-1:2379"
+
+      - "ETCD_INITIAL_CLUSTER_TOKEN=cluster"
+    ports: 
+      # - "9090:9090"
+      - "12379:2379"
+    networks: 
+      - app_net
+
+  etcd-2:
+    build: 
+      context: ./etcd
+    container_name: etcd-2
+    privileged: true
+    restart: always
+    environment: 
+      - "ETCD_DATA_DIR=~"
+      - "ETCD_NAME=node-2"
+      - "ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd-2:2380" # communicating etcd data around the cluster
+      - "ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380"
+
+      - "ETCD_ADVERTISE_CLIENT_URLS=http://etcd-2:2379"
+      - "ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379"
+
+      - "ETCD_INITIAL_CLUSTER=node-1=http://etcd-1:2380,node-2=http://etcd-2:2380,node-3=http://etcd-3:2380"
+      - "ETCD_INITIAL_CLUSTER_STATE=new"
+
+      - "ALLOW_NONE_AUTHENTICATION=yes"
+      - "ENDPOINTS=etcd-2:2379"
+
+      - "ETCD_INITIAL_CLUSTER_TOKEN=cluster"
+      
+    ports: 
+      - "22379:2379"
+    networks: 
+      - app_net
+
+  etcd-3:
+    build: 
+      context: ./etcd
+    container_name: etcd-3
+    privileged: true
+    restart: always
+    environment: 
+      - "ETCD_DATA_DIR=~"
+      - "ETCD_NAME=node-3"
+      - "ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd-3:2380" # communicating etcd data around the cluster
+      - "ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380"
+
+      - "ETCD_ADVERTISE_CLIENT_URLS=http://etcd-3:2379"
+      - "ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379"
+
+      - "ETCD_INITIAL_CLUSTER=node-1=http://etcd-1:2380,node-2=http://etcd-2:2380,node-3=http://etcd-3:2380"
+      - "ETCD_INITIAL_CLUSTER_STATE=new"
+
+      - "ALLOW_NONE_AUTHENTICATION=yes"
+      - "ENDPOINTS=etcd-3:2379"
+      - "ETCD_INITIAL_CLUSTER_TOKEN=cluster"
+    
+    ports: 
+      - "32379:2379"
+    networks: 
+      - app_net
+
+networks:
+    app_net:
+        external: true

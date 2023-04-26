@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+
+  v2rays:
+    build: 
+      context: ./v2ray
+      args:
+        - PLATFORM=server-cf
+    privileged: true
+    restart: always
+    # ports:
+      # - "16823:16823"
+    # extra_hosts:
+    #   - host.docker.internal:host-gateway 
+    network_mode: host 
+    
+  v2rayc:
+    build: 
+      context: ./v2ray
+      args:
+        - SERVER_IP=172.104.174.201
+        - PLATFORM=client
+    privileged: true
+    restart: always
+    ports:
+      - "1080:1080"
+    # network_mode: host
+
+  # cloudflared:
+  #   image: crazymax/cloudflared:latest
+  #   container_name: cloudflared
+  #   ports:
+  #     - "5053:5053/udp"
+  #     - "49312:49312"
+  #   network_mode: host

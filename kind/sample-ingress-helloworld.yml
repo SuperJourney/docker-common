@@ -1,0 +1,35 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: helloworld
+    image: canbefree/helloworld:1.0
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloworld-service
+spec:
+  selector:
+    app: helloworld
+  ports:
+  # Default port used by the image
+  - port: 8000 
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: helloworld-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /hi
+        backend:
+          serviceName: helloworld-service
+          servicePort: 8000 
+---

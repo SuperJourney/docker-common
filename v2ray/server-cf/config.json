@@ -1,0 +1,49 @@
+{
+  "inbounds": [
+    {
+      "port": 16823, // 服务器监听端口
+      "protocol": "vmess", // 主传入协议
+      "settings": {
+        "clients": [
+          {
+            "id": "150dc6ac-cb28-11ed-afa1-0242ac120002", // 用户 ID，客户端与服务器必须相同
+            "alterId": 0
+          }
+        ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",  // 主传出协议
+      "settings": {}
+    },
+    {
+      "tag": "warp",
+      "protocol": "socks",
+      "settings": {
+        "servers": [
+          {
+            "address": "127.0.0.1", // warp代理模式提供的socks服务
+            "port": 40000, // warp的socks端口
+            "users": []
+          }
+        ]
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "warp",
+        "domain": [
+          "openai.com",
+          "ip138.com",
+          "geosite:discord"
+
+        ]
+      }
+    ]
+  }
+}

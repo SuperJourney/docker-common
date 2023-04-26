@@ -1,0 +1,25 @@
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks: 
+      - app_net
+
+  kafka:
+    image:  registry.cn-shenzhen.aliyuncs.com/canbefree/kafka:v1.0.0
+    ports:
+      - "9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks: 
+      - app_net
+
+networks:
+    app_net:
+        external: true

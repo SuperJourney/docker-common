@@ -62,9 +62,11 @@ Read [grafana redis](redis/README.md)
 - [X] mysql指标监控 https://github.com/prometheus/mysqld_exporter
 - [X] redis指标监控 https://github.com/oliver006/redis_exporter
 
+## prometheus
+
 ### prometheus指标查询
 
-https://prometheus.io/
+[https://prometheus.io/](https://prometheus.io/)
 
 | 类型   | query                                                | 意义               |
 | :----- | :--------------------------------------------------- | :----------------- |
@@ -78,12 +80,17 @@ https://prometheus.io/
 
 kafka docker部署参考 wurstmeister/kafka-docker [^1][1]
 
-## frp 内网穿透
+## frp 
 
-映射内网http接口
+https://github.com/fatedier/frp
 
-### phddns 花生壳
+### ~phddns 花生壳~
 
-这个也太垃圾了， 不支持web方式i访问。 放弃了
+ ~不支持web方式i访问。 放弃了~
+
+
+---
+
+
 
 [1]: https://github.com/wurstmeister/kafka-docker

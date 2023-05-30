@@ -19,9 +19,6 @@
 - [X] ts
 - [X] v2ray
 
-
-
-
 ## mariadb
 
 ## elk
@@ -80,7 +77,16 @@ Read [grafana redis](redis/README.md)
 
 kafka docker部署参考 wurstmeister/kafka-docker [^1][1]
 
-## frp 
+
+## jaeger
+
+```
+	"github.com/uber/jaeger-client-go"
+	"github.com/uber/jaeger-client-go/config"
+	"github.com/uber/jaeger-lib/metrics"
+```
+
+## frp
 
 https://github.com/fatedier/frp
 
@@ -88,9 +94,6 @@ https://github.com/fatedier/frp
 
  ~不支持web方式i访问。 放弃了~
 
-
 ---
-
-
 
 [1]: https://github.com/wurstmeister/kafka-docker

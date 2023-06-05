@@ -90,7 +90,27 @@ kafka docker部署参考 wurstmeister/kafka-docker [^1][1]
 
 https://github.com/fatedier/frp
 
-### ~phddns 花生壳~
+```
+# frps.ini
+[common]
+bind_port = 7000
+```
+
+```
+# frpc.ini
+[common]
+server_addr = <C的IP地址>
+server_port = 7000
+
+[web]
+type = tcp
+local_ip = <B的IP地址>
+local_port = <B的端口>
+remote_port = 8080# 访问端口，访问形式 ： http://<C的IP地址>:8080
+```
+
+
+## ~phddns 花生壳~
 
  ~不支持web方式i访问。 放弃了~
 

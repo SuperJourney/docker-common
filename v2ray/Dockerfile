@@ -9,4 +9,4 @@ COPY ./${PLATFORM}/config.json /etc/v2ray/config.json
 RUN sed -i "s/<your ip>/${SERVER_IP}/" /etc/v2ray/config.json
 
 
-CMD [ "run","--config=/etc/v2ray/config.json"]
+# CMD [ "run","--config=/etc/v2ray/config.json"]
